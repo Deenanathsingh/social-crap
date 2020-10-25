@@ -1,0 +1,81 @@
+<app-admin-header></app-admin-header>
+<div class="admin-dashboard">
+  <div class="container-fluid">
+    <div class="row justify-content-center head">
+      <div class="col-md-12 header-bar">
+        <img class="dashboard" src="../assets/img/icon/manage-users.png">
+        <span class="title">Manage Tickets</span>
+      </div>
+    </div>
+    <div class="manage">
+      <div class="row">
+        <div class="col-md-12">
+          <table class="table cust-table table-bordered table-hover">
+            <thead class="thead-dark">
+              <tr>
+                <th>CREATED</th>
+                <th>ID</th>
+                <th>STATUS</th>
+                <th>TITLE</th>
+                <th>ISSUE</th>
+                <th>REPORTED BY</th>
+                <th>OPTIONS</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let ticket of tickets">
+                <td>{{ticket.created}}</td>
+                <td>{{ticket.id}}</td>
+                <td>{{ticket.currentStatus.status}}</td>
+                <td>{{ticket.title}}</td>
+                <td>{{ticket.issue}}</td>
+                <td>{{ticket.sentBy.name}} ({{ticket.sentBy.userId}})</td>
+                <td><img class="edit" src="../assets/img/icon/gear-icon.png" data-toggle="modal"
+                    data-target="#ticketModal" (click)="setTicket(ticket)"></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- New Ticket Modal -->
+<div class="modal fade" id="ticketModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Create Ticket</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="false">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form (ngSubmit)="reply(data)" #data="ngForm">
+          <div class="form-group">
+            <label>Reply</label>
+            <textarea class="form-control" name="remark" rows="3" ngModel></textarea>
+          </div>
+          <div class="form-group">
+            <label>Status</label>
+            <select class="form-control" name="status" ngModel>
+              <option selected>OPEN</option>
+              <option>CLOSED</option>
+            </select>
+          </div>
+          <button class="form-control btn-blue" type="submit">SUBMIT</button>
+        </form>
+      </div>
+      <div class="history">
+        <h6>History</h6>
+        <div class="remark" *ngFor="let statusHistory of history">
+          <span>{{statusHistory.user.userId==user.id?"You":statusHistory.user.name}} :-
+          </span><span>{{statusHistory.remark}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- New Ticket modal -->
+<app-foot></app-foot>

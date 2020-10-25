@@ -1,0 +1,53 @@
+<app-header></app-header>
+<div class="body">
+  <article class="container">
+    <div class="row justify-content-center">
+      <div class="col-sm-12 photos">
+        <h4>Photos</h4>
+        <hr>
+        <div *ngIf="photos" class="photo">
+          <a *ngFor="let photo of photos">
+            <img data-toggle="modal" data-target="#photoModal" [src]="photo">
+          </a>
+        </div>
+      </div>
+    </div>
+  </article>
+</div>
+<!-- Tag Modal -->
+<div class="modal fade" id="photoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Tag Friends</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="false">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search" [(ngModel)]="searchTerm"
+            [ngModelOptions]="{standalone: true}" (ngModelChange)="searchUser()">
+        </div>
+        <div *ngIf="searchedUsers" class="search-drop-down">
+          <ul *ngFor="let searchedUser of searchedUsers">
+            <li (click)="addTag(searchedUser)">
+              <img *ngIf="searchedUser.profilePic" [src]="searchedUser.profilePic" class="rounded-circle">
+              <img *ngIf="!searchedUser.profilePic" src="../assets/img/example.png" class="rounded-circle">
+              <span class="name">{{searchedUser.name}}</span>
+            </li>
+          </ul>
+        </div>
+        <div *ngIf="tags" class="tag-added">
+          <h5 class="modal-title">Tags</h5>
+          <div class="post-extras">
+            <span *ngFor="let tag of tags" (click)="removeTag(tag)" class="tag">{{tag.name}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Tag modal -->
+<app-footer></app-footer>

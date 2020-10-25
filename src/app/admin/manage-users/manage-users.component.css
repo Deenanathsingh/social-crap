@@ -1,0 +1,42 @@
+.head{
+	padding-left:15px;
+	padding-right:15px;
+}
+
+.header-bar{
+	margin-top:20px;
+	margin-bottom:20px;
+	background-color:#FFFFFF;
+	width:100%;
+	padding-left:20px;
+	padding-top:10px;
+	padding-bottom:10px;
+}
+
+.header-bar img.dashboard{
+	position: relative;
+	width:24px;
+	height:24px;
+}
+
+.header-bar span.title{
+	position: absolute;
+	font-size: 27px;
+	margin-left:18px;
+	margin-top:-6px;
+	color:#343a40;
+}
+
+.cust-table{
+	text-align:center;
+	border:1.5px solid #eaeaea;
+}
+
+.cust-table img.edit{
+	width:32px;
+	height:32px;
+}
+
+.btn-action{
+	margin:10px;
+}

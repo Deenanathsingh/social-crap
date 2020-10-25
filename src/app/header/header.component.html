@@ -1,0 +1,89 @@
+<header>
+  <div class="container">
+    <nav class="navbar navbar-expand-lg navbar-dark">
+      <a class="navbar-brand" routerLink="/"><img src="../assets/img/logo.png"></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item note active">
+            <a class="nav-link" routerLink="/"><img src="../assets/img/icon/home-icon.png" alt="Home" title="Home"></a>
+          </li>
+          <li class="nav-item note active">
+            <a class="nav-link" routerLink="/search">Find Friends</a>
+          </li>
+          <li class="nav-item note active">
+            <a class="nav-link" routerLink="/profile">
+              <img src="../assets/img/icon/profile-icon.png" alt="Friend Requests" title="Friend Requests">
+            </a>
+          </li>
+          <li class="nav-item note active">
+            <a class="nav-link" routerLink="/chat"><img src="../assets/img/icon/chat-icon.png" alt="Messages"
+                title="Messages"></a>
+          </li>
+          <li *ngIf="user" class="nav-item dropdown note active">
+            <span class="count rounded-circle">{{user.friendRequests.length}}</span>
+            <a class="nav-link" href="#" dropdown-toggle="dropdown" id="navbarDropdown" role="button"
+              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <img src="../assets/img/icon/friend-request-icon.png" alt="Friend Requests" title="Friend Requests">
+            </a>
+            <div class="dropdown-menu dropdown-menu-right cust-dropdown-2">
+              <a class="dropdown-item" routerLink="/friendRequests">Friend Requests</a>
+              <div class="dropdown-divider"></div>
+              <div *ngFor="let request of user.friendRequests">
+                <a class="dropdown-item" routerLink="/">
+                  <div class="friend-requests">
+                    <img *ngIf="request.profilePic" [src]="request.profilePic" class="rounded-circle">
+                    <img *ngIf="!request.profilePic" src="../assets/img/example.png" class="rounded-circle">
+                    <span class="name">{{request.name}}</span>
+                    <span class="time">12-04-2019 15:09:12</span>
+                    <button class="btn btn-blue" (click)="confirmFriendRequest(request.requestId)">accept</button>
+                  </div>
+                </a>
+                <div class="dropdown-divider"></div>
+              </div>
+              <a class="dropdown-item" routerLink="/friendRequest">Show more...</a>
+            </div>
+          </li>
+          <li *ngIf="user" class="nav-item dropdown note">
+            <span class="count rounded-circle">{{user.notifications.length}}</span>
+            <a class="nav-link" href="#" dropdown-toggle="dropdown" id="navbarDropdown" role="button"
+              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <img src="../assets/img/icon/bell-icon.png" alt="Notifications" title="Notifications">
+            </a>
+            <div class="dropdown-menu dropdown-menu-right cust-dropdown-1">
+              <label class="dropdown-item" >Notifications</label> <span class="clear" (click)="clearAllNotifications()">Clear</span>
+              <div class="dropdown-divider"></div>
+              <div *ngFor="let notification of user.notifications">
+                <a class="dropdown-item" routerLink="/">
+                  <div class="notification">
+                    <img src="../assets/img/example.png" class="rounded-circle">
+                    <span>{{notification.notification}}</span>
+                  </div>
+                </a>
+                <div class="dropdown-divider"></div>
+              </div>
+              <a class="dropdown-item" routerLink="/notifications">Show more...</a>
+            </div>
+          </li>
+          <li class="nav-item dropdown note active">
+            <a class="nav-link" href="#" dropdown-toggle="dropdown" id="navbarDropdown" role="button"
+              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <img src="../assets/img/icon/setting-icon.png" alt="Friend Requests" title="Friend Requests">
+            </a>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" routerLink="/editProfile">Edit Profile</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" routerLink="/tickets">Need Help?</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" (click)="logout()">Logout</a>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+</header>

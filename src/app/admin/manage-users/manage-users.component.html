@@ -1,0 +1,68 @@
+<app-admin-header></app-admin-header>
+<div class="admin-dashboard">
+  <div class="container-fluid">
+    <div class="row justify-content-center head">
+      <div class="col-md-12 header-bar">
+        <img class="dashboard" src="../assets/img/icon/manage-users.png">
+        <span class="title">Manage Users</span>
+      </div>
+    </div>
+    <div class="manage">
+      <div class="row">
+        <div class="col-md-12">
+          <table class="table cust-table table-bordered table-hover">
+            <thead class="thead-dark">
+              <tr>
+                <th>CREATED</th>
+                <th>ID</th>
+                <th>STATUS</th>
+                <th>FIRST NAME</th>
+                <th>LAST NAME</th>
+                <th>EMAIL</th>
+                <th>MOBILE NUMBER</th>
+                <th>ROLE</th>
+                <th>DOB</th>
+                <th>OPTIONS</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let user of users">
+                <td>{{user.created}}</td>
+                <td>{{user.id}}</td>
+                <td>{{user.status}}</td>
+                <td>{{user.firstName}}</td>
+                <td>{{user.lastName}}</td>
+                <td>{{user.email}}</td>
+                <td>{{user.mobileNumber}}</td>
+                <td>{{user.role.role?user.role.role:null}}</td>
+                <td>{{user.about && user.about.dob?user.about.dob:null}}</td>
+                <td><img class="edit" src="../assets/img/icon/gear-icon.png" data-toggle="modal"
+                  data-target="#editModal" (click)="setUser(user)"></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Update User</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="false">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <button class="btn btn-warning btn-action" (click)="activateAndDeactivateUser()">{{user && user.active?"Deactivate":"Activate"}}</button>
+        <button class="btn btn-danger btn-action" (click)="blockAndUnblockUser()">{{user && user.blocked?"Unblock":"Block"}}</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- modal -->
+<app-foot></app-foot>

@@ -1,0 +1,54 @@
+<app-header></app-header>
+<div class="body">
+  <article class="container">
+    <div class="chat">
+      <div class=row>
+        <div class="col-sm-4 contact">
+          <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Search">
+          </div>
+          <div *ngIf="user && user.friends" class="contacts">
+            <div *ngFor="let friend of user.friends" class="contact-box"  [ngClass]="{ 'contact-box-blue':  chattingWith == friend.userId }">
+              <div (click)="getChat(friend.userId)">
+                <img *ngIf="friend.profilePic" [src]="friend.profilePic" class="rounded-circle">
+                <img *ngIf="!friend.profilePic" src="../assets/img/example.png" class="rounded-circle">
+                <label>{{friend.name}}</label>
+                <!-- <span><img src="../assets/img/icon/online-icon.png"></span> -->
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-8 chat-box">
+          <div *ngIf="chat" class="chat-screen">
+            <div *ngFor="let message of chat" class="message">
+              <img *ngIf="message.sentBy && message.sentBy.profilePic" [src]="message.sentBy.profilePic"
+                class="rounded-circle" [ngClass]="{ 'right':  message.sentBy.userId != user.id }">
+              <img *ngIf="!message.sentBy.profilePic" src="../assets/img/example.png" class="rounded-circle"
+                [ngClass]="{ 'right':message.sentBy.userId != user.id }">
+              <span [ngClass]="{ 'right': message.sentBy.userId != user.id }">{{message.message}}</span>
+            </div>
+            <!-- <div class="message">
+              <img *ngIf="message.sentBy && message.sentBy.profilePic" [src]="message.sentBy.profilePic"
+                class="rounded-circle right">
+              <img *ngIf="!message.sentBy.profilePic" src="../assets/img/example.png" class="rounded-circle right">
+              <span class="right">{{message.message}}</span>
+            </div> -->
+          </div>
+          <form #message="ngForm">
+            <div class="form-group chat-tool">
+              <div class="row">
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" name="message" ngModel>
+                </div>
+                <div class="col-sm-2">
+                  <button class="btn btn-send" type="submit" (click)="sendMessage(message,chattingWith); message.reset()">Send</button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </article>
+</div>
+<app-footer></app-footer>

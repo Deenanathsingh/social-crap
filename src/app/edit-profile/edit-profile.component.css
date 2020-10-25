@@ -1,0 +1,35 @@
+.panel{
+	margin-top:50px;
+	min-height:525px;
+	padding:25px;
+}
+
+.btn-self{
+	background-color:#0045cc;
+	color:#FFFFFF;
+}
+.btn-self:hover{
+	background-color:#000000;
+	border:1px solid #000000;
+	border-radius:3px;
+	color:#ffffff;
+}
+.editor{
+	margin-top:30px;
+}
+
+.edit-icon{
+	width:35px;
+	height:35px;
+	margin-right:10px;
+}
+
+.edit-icon:hover{
+	width:33px;
+	height:33px;
+	margin-right:10px;
+}
+
+.display{
+	display: none;
+}

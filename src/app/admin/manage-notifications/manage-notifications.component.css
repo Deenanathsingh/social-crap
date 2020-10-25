@@ -1,0 +1,160 @@
+.head{
+	padding-left:15px;
+	padding-right:15px;
+}
+
+.header-bar{
+	margin-top:20px;
+	margin-bottom:20px;
+	background-color:#FFFFFF;
+	width:100%;
+	padding-left:20px;
+	padding-top:10px;
+	padding-bottom:10px;
+}
+
+.header-bar img.dashboard{
+	position: relative;
+	width:24px;
+	height:24px;
+}
+
+.header-bar span.title{
+	position: absolute;
+	font-size: 27px;
+	margin-left:18px;
+	margin-top:-6px;
+	color:#343a40;
+}
+
+.cust-table{
+	text-align:center;
+	border:1.5px solid #eaeaea;
+}
+
+.cust-table img.edit{
+	width:32px;
+	height:32px;
+}
+
+.cust-table td img{
+	width:64px;
+	height:64px;
+}
+
+.btn-blue{
+	background-color:#0045cc;
+    color:#FFFFFF;
+    width:80px;
+    margin-left:0px;
+}
+
+.btn-blue:hover{
+	opacity: 0.9;
+}
+
+.history{
+	max-height: 200px;
+	overflow-y: auto;
+	margin:15px;
+}
+
+.history::-webkit-scrollbar { 
+    display: none; 
+} 
+
+.remark{
+	padding:10px;
+	background-color: #eaeaea;
+	border-radius: 5px;
+	margin-top:10px;
+}
+
+.send-btn{
+	margin-top:30px;
+}
+
+.send-btn button{
+	float:right;
+}
+
+label{
+	margin-top:10px;
+	margin-left:5px;
+}
+.search-drop-down{
+	max-height:180px;
+	padding:0;
+}
+
+.search-drop-down ul{
+	max-height:150px;
+	list-style: none;
+	padding:0;
+	margin:0;
+	overflow-y: scroll;
+	border-radius: 0px 0px 5px 5px;
+}
+
+.search-drop-down ul::-webkit-scrollbar { 
+    display: none; 
+} 
+
+.search-drop-down ul li{
+	padding-left:12px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	background-color:#F5F5F5;
+	margin:0;
+}
+
+.search-drop-down ul li:hover{
+	color:#0045cc;
+}
+
+.search-drop-down img{
+	width: 42px;
+	height: 42px;
+}
+
+.search-drop-down span.name{
+	position: absolute;
+	margin-top:8px;
+	margin-left:10px;
+}
+
+.tag-added{
+	margin-top:20px;
+}
+
+.post-extras span{
+	display: inline-block;
+}
+
+.tag{
+	width:auto;
+	height:20px;
+	background-color: #0045cc;
+	padding-left:5px;
+	padding-right:5px;
+	padding-top:2px;
+	color:#FFFFFF;
+	font-size: 10px;
+	margin: 1px;
+	border-radius: 10px;
+}
+
+.cross{
+	color:#FFFFFF;
+	font-size: 10px;
+}
+
+.cross a{
+	text-decoration: none;
+	color:#FFFFFF;
+}
+
+.cross a:hover{
+	text-decoration: none;
+	color: rgb(238, 48, 14);
+}

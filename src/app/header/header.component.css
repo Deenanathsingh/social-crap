@@ -1,0 +1,121 @@
+header{
+	background-color:#00ccc2;
+}
+header img{
+	width:150px;
+	height:60px;
+}
+.logo{
+	margin-left:auto;
+	margin-right:auto;
+}
+.logo img{	
+	width:250px;
+	height:75px;
+}
+.note{
+	background-color:#00ccc2;
+	border:4px solid #00ccc2;
+	padding:10px;
+	text-transform:capitalize;
+}
+.note img{
+	width:25px;
+	height:25px;
+}
+.count{
+	background-color:#FF4500;
+	color:#FFFFFF;
+	position: absolute;
+	min-width:25px;
+	height:25px;
+	padding-left:8px;
+    right:-11px;
+    top:-11px;
+	z-index:1;
+}
+
+.cust-dropdown-1{
+	width:480px;
+	background-color:#FFFFFF;
+	max-height:320px;
+	overflow-y:scroll;
+}
+
+.cust-dropdown-2{
+	width:420px;
+	background-color:#FFFFFF;
+	max-height:320px;
+	overflow-y:scroll;
+}
+
+.notification {
+	height: auto;
+	width:100%;
+	margin-bottom: 10px;
+	margin-right: 10px;
+}
+
+.notification img{
+	width: 42px;
+	height: 42px;
+}
+
+.notification span{
+	position:absolute;
+	height: auto;
+	font-size:12px;
+	margin-left:10px;
+	margin-right: 18px;
+	white-space:pre-line;
+}
+
+.friend-requests{
+	height: auto;
+	width:100%;
+	margin-bottom: 10px;
+	margin-right: 10px;
+	padding:10px;
+}
+
+.friend-requests img{
+	width: 42px;
+	height: 42px;
+}
+
+.friend-requests span.name{
+	position: absolute;
+	margin-top:2px;
+	margin-left:10px;
+}
+
+.friend-requests span.time{
+	position: absolute;
+	font-size:11px;
+	margin-top:20px;
+	margin-left:10px;
+}
+
+.friend-requests button{
+	float: right;
+}
+
+.btn-blue{
+	background-color:#0045cc;
+	color:#FFFFFF;
+}
+
+.btn-blue:hover{
+	opacity: 0.9;
+}
+
+span.clear{
+	position: absolute;
+	top:10px;
+	right:10px;
+	font-size: 12px
+}
+
+span.clear:hover{
+	color:#00ccc2;
+}

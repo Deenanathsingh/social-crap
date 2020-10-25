@@ -1,0 +1,74 @@
+<app-header></app-header>
+<div class="body">
+  <article class="container">
+    <div class="chat">
+      <div class=row>
+        <div *ngIf="tickets" class="col-sm-4 contact">
+          <div class="contacts">
+            <div *ngFor="let tck of tickets" class="contact-box"
+              [ngClass]="{ 'contact-box-blue':  tck.id == selectedTicket.id }">
+              <div (click)="setTicket(tck.id)">
+                <label>{{tck.title}}</label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-8 chat-box">
+          <div *ngIf="selectedTicket" class="chat-screen">
+            <div *ngFor="let history of selectedTicket.statusHistory" class="message">
+              <img *ngIf="history.user && history.user.profilePic" [src]="history.user.profilePic"
+                class="rounded-circle" [ngClass]="{ 'right':  history.user.userId != user.id }">
+              <img *ngIf="!history.user.profilePic" src="../assets/img/example.png" class="rounded-circle"
+                [ngClass]="{ 'right':history.user.userId != user.id }">
+              <span [ngClass]="{ 'right': history.user.userId != user.id }">{{history.remark}}</span>
+            </div>
+          </div>
+          <form #remark="ngForm">
+            <div class="form-group chat-tool">
+              <div class="row">
+                <div *ngIf="selectedTicket" class="col-sm-8">
+                  <input type="text" class="form-control" name="remark" ngModel>
+                </div>
+                <div *ngIf="selectedTicket" class="col-sm-2">
+                  <button class="btn btn-send" type="submit" (click)="reply(remark); remark.reset()">Reply</button>
+                </div>
+                <div class="col-sm-2">
+                  <button class="btn btn-send" data-toggle="modal" data-target="#ticketModal">New</button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </article>
+</div>
+<!-- New Ticket Modal -->
+<div class="modal fade" id="ticketModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Create Ticket</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="false">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form (ngSubmit)="saveTicket(ticket)" #ticket="ngForm">
+          <div class="form-group">
+            <label>Title</label>
+            <input type="text" class="form-control" placeholder="Title" name="title" ngModel>
+          </div>
+          <div class="form-group">
+            <label>Issue</label>
+            <textarea class="form-control" id="issue" name="issue" rows="3" ngModel></textarea>
+          </div>
+          <button class="form-control btn-send" type="submit">SUBMIT</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- New Ticket modal -->
+<app-footer></app-footer>

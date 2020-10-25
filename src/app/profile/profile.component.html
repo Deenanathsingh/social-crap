@@ -1,0 +1,218 @@
+<app-header></app-header>
+<div class="body">
+    <article class="container">
+        <div class="row">
+            <div class="col-sm-12 cover">
+                <img *ngIf="cover" [src]="cover" class="rounded">
+                <img *ngIf="!cover" src="../assets/img/test.jpeg" class="rounded">
+                <div class="middle">
+                    <div class="upload">
+                        <span class="btn btn-default btn-file">
+                            <label>Change</label>
+                            <input type="file" name="file" (change)="uploadCoverPhoto($event)">
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="dp">
+                <img *ngIf="dp" [src]="dp" class="rounded-circle">
+                <img *ngIf="!dp" src="../assets/img/DeenaPic.jpg" class="rounded-circle">
+                <div class="middle">
+                    <div class="upload">
+                        <span class="btn btn-default btn-file">
+                            <label>Change</label>
+                            <input type="file" name="file" (change)="uploadProfilePhoto($event)">
+                        </span>
+                    </div>
+                </div>
+                <h5 *ngIf="user" class="user-name">{{user.firstName +" " +user.lastName}}</h5>
+            </div>
+        </div>
+        <div class="row left-bar">
+            <div class="col-sm-4">
+                <div class="row">
+                    <div *ngIf="user" class="col-sm-12 bar-box">
+                        <label>Intro</label>
+                        <a routerLink="/editProfile"><label class="intro-edit"><i class="fa fa-pencil" aria-hidden="true"></i></label></a>
+                        <div class="intro">
+                            <p *ngIf="user.about && user.about.bio" class="bio">{{user.about.bio}}</p>
+                            <hr>
+                            <p *ngIf="user.created"><i class="fa fa-calendar-o fa-cust" aria-hidden="true"></i>Joined On
+                                <span>{{user.created}}</span></p>
+                            <p *ngIf="user.address && user.address.city"><i class="fa fa-globe fa-cust"
+                                    aria-hidden="true"></i>From
+                                <span>{{user.address.city}}</span></p>
+                            <p><i class="fa fa-bus fa-cust" aria-hidden="true"></i>Followed By
+                                <span>{{user.followers.length}}</span> People</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 bar-box">
+                        <label><a routerLink="/photos">Photos</a></label>
+                        <div *ngIf="photos" class="row photos-box">
+                            <div *ngFor="let photo of photos" class="col-sm-4 photo-box-padding">
+                                <img [src]="photo">
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="user" class="col-sm-12 bar-box">
+                        <label><a routerLink="/friends">Friends</a></label>
+                        <div *ngIf="user.friends" class="row photos-box">
+                            <div *ngFor="let friend of user.friends" class="col-sm-4 no-padding photo-box-padding">
+                                <img *ngIf="!friend.profilePic" src="../assets/img/example.png">
+                                <img *ngIf="friend.profilePic" [src]="friend.profilePic">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-8">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="post">
+                            <form (ngSubmit)="publishPost(post); post.reset()" #post="ngForm">
+                                <div class="form-group">
+                                    <label>Create post</label>
+                                    <textarea class="form-control" id="post" name="post" rows="3" ngModel></textarea>
+                                </div>
+                                <div *ngIf="upload" class="player">
+                                    <img src="{{upload.url}}">
+                                    <span (click)="removeUpload()" class="upload-delete"><i class="fa fa-trash"
+                                            aria-hidden="true"></i></span>
+                                </div>
+                                <div *ngIf="tags" class="post-extras">
+                                    <span *ngFor="let tag of tags" class="tag">{{tag.name}}</span>
+                                </div>
+                                <div class=post-footer>
+                                    <span class="btn btn-default btn-file">
+                                        <img src="../assets/img/icon/image-add.png"> <input type="file" name="file"
+                                            (change)="uploadFile($event)">
+                                    </span>
+                                    <span class="btn btn-default btn-file">
+                                        <img src="../assets/img/icon/tag-add.png" data-toggle="modal"
+                                            data-target="#tagModal">
+                                    </span>
+                                    <button class="btn btn-blue float-right" type="submit">Publish</button>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div *ngFor="let post of posts" class="feed">
+                            <div class="feed-header">
+                                <div class="feed-info">
+                                    <img *ngIf="!post.user.profilePic" src="../assets/img/DeenaPic.jpg"
+                                        class="rounded-circle feed-user-img">
+                                    <img *ngIf="post.user.profilePic" [src]="post.user.profilePic"
+                                        class="rounded-circle feed-user-img">
+                                    <label class="feed-user-name">{{post.user.name}}</label>
+                                    <span class="feed-time">{{post.created}}</span>
+                                </div>
+                            </div>
+                            <div class="feed-content">
+                                <p>{{post.post}}</p>
+                            </div>
+                            <div *ngIf="post.upload" class="feed-uploads">
+                                <img [src]="post.upload.url">
+                            </div>
+                            <div class="feed-option">
+                                <button class="share" data-toggle="modal" data-target="#shareModal"><img src="../assets/img/icon/share-icon.png"></button>
+                                <button (click)="likePost(post.id)" class="like">
+                                    <img *ngIf="isLiked(post.id)" src="../assets/img/icon/liked-icon.png">
+                                    <img *ngIf="!isLiked(post.id)" src="../assets/img/icon/like-icon.png">
+                                </button><span>{{post.likesAndDisLikes.numberOfLikes}}</span>
+                                <div class="comment">
+                                    <form #comment="ngForm">
+                                        <div class="input-group mb-3">
+                                            <input type="text" class="form-control" name="comment" placeholder="Comment"
+                                                ngModel>
+                                            <div class="input-group-append">
+                                                <button class="btn btn-outline-secondary btn-blue"
+                                                    (click)="addComment(comment,post.id); comment.reset()"
+                                                    type="submit">Comment</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="comment-box">
+                                <label>Comments <span class="comment-count">{{post.comments.length}}</span></label>
+                                <ul *ngIf="post.comments">
+                                    <li *ngFor="let comment of post.comments">
+                                        <span class="user-bar">
+                                            <img *ngIf="comment.user.profilePic" [src]="comment.user.profilePic"
+                                                class="rounded-circle">
+                                            <img *ngIf="!comment.user.profilePic" src="../assets/img/example.png"
+                                                class="rounded-circle">
+                                            <label class="name">{{comment.user.name}}</label>
+                                        </span>
+                                        <br *ngIf="comment.comment.length >= 70">
+                                        <span class="comment">{{comment.comment}}</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+    <!-- Tag Modal -->
+    <div class="modal fade" id="tagModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Tag Friends</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="false">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search" [(ngModel)]="searchTerm"
+                            [ngModelOptions]="{standalone: true}" (ngModelChange)="searchUser()">
+                    </div>
+                    <div *ngIf="searchedUsers" class="search-drop-down">
+                        <ul *ngFor="let searchedUser of searchedUsers">
+                            <li (click)="addTag(searchedUser)">
+                                <img *ngIf="searchedUser.profilePic" [src]="searchedUser.profilePic"
+                                    class="rounded-circle">
+                                <img *ngIf="!searchedUser.profilePic" src="../assets/img/example.png"
+                                    class="rounded-circle">
+                                <span class="name">{{searchedUser.name}}</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div *ngIf="tags" class="tag-added">
+                        <h5 class="modal-title">Tags</h5>
+                        <div class="post-extras">
+                            <span *ngFor="let tag of tags" (click)="removeTag(tag)" class="tag">{{tag.name}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Tag modal -->
+    <!--share Modal -->
+    <div class="modal fade" id="shareModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Share </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="false">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <button class="btn btn-blue btn-margin">PUBLIC</button>
+                    <button class="btn btn-blue">FRIEND</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- modal -->
+</div>
+<app-footer></app-footer>

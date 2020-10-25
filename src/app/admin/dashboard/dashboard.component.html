@@ -1,0 +1,140 @@
+<div class="admin-dashboard">
+    <div class="container">
+        <div class="row justify-content-center head">
+            <div class="col-md-12 header-bar">
+                <img class="dashboard" src="../assets/img/icon/dashboard-icon.png">
+                <span class="title">Dashboard</span>
+                <img (click)="logout()" class="logout" src="../assets/img/icon/logout-red.png">
+                <img  data-toggle="modal" data-target="#addAdminModal" class="add" src="../assets/img/icon/add-icon.png">
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-4">
+                <div class="profile-box">
+                    <div class="profile-img">
+                        <img *ngIf="dp" [src]="dp" width="100%">
+                    </div>
+                    <div *ngIf="user" class="name">
+                        <h2>{{user.firstName?user.firstName:Admin}}</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div routerLink="/admin/manageUsers" class="option-box">
+                            <div class="option-box-img">
+                                <img src="../assets/img/icon/manage-users.png" width="100%">
+                            </div>
+                            <h5>USERS</h5>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div routerLink="/admin/managePosts" class="option-box">
+                            <div class="option-box-img">
+                                <img src="../assets/img/icon/manage-posts.png" width="100%">
+                            </div>
+                            <h5>POSTS</h5>
+                        </div>
+                    </div>
+                    <!-- <div class="col-md-4">
+                        <div routerLink="/admin/manageLogs" class="option-box">
+                            <div class="option-box-img">
+                                <img src="../assets/img/icon/manage-logs.png" width="100%">
+                            </div>
+                            <h5>LOGS</h5>
+                        </div>
+                    </div> -->
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div routerLink="/admin/manageTickets" class="option-box">
+                            <div class="option-box-img">
+                                <img src="../assets/img/icon/manage-tickets.png" width="100%">
+                            </div>
+                            <h5>TICKETS</h5>
+                        </div>
+                    </div>
+                    <!-- <div class="col-md-4">
+                        <div routerLink="/admin/manageEmails" class="option-box">
+                            <div class="option-box-img">
+                                <img src="../assets/img/icon/email-icon.png" width="100%">
+                            </div>
+                            <h5>EMAIL</h5>
+                        </div>
+                    </div> -->
+                    <div class="col-md-6">
+                        <div routerLink="/admin/manageNotifications" class="option-box">
+                            <div class="option-box-img">
+                                <img src="../assets/img/icon/send-notifications.png" width="100%">
+                            </div>
+                            <h5>NOTIFICATION</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- add Admin Modal -->
+<div class="modal fade" id="addAdminModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Add Admin</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="false">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form (ngSubmit)="addAdmin(admin)" #admin="ngForm">
+            <div class="row">
+                 <div class="col-sm-6">
+                      <div class="form-group">
+                           <input type="text" class="form-control" placeholder="First name"
+                                name="firstName" ngModel>
+                      </div>
+                 </div>
+                 <div class="col-sm-6">
+                      <div class="form-group">
+                           <input type="text" class="form-control" placeholder="Last name" name="lastName"
+                                ngModel>
+                      </div>
+                 </div>
+            </div>
+            <div class="form-group">
+                 <input type="email" class="form-control" placeholder="Email address" name="email" ngModel>
+            </div>
+            <div class="form-group">
+                 <div class="form-check form-check-inline">
+                      <label class="form-check-label">
+                           <input class="form-check-input" type="radio" name="gender" value="male" ngModel>
+                           Male
+                      </label>
+                 </div>
+                 <div class="form-check form-check-inline">
+                      <label class="form-check-label">
+                           <input class="form-check-input" type="radio" name="gender" value="female"
+                                ngModel> Female
+                      </label>
+                 </div>
+            </div>
+            <div class="form-group">
+                 <input class="form-control" type="date" name="dob" ngModel>
+            </div>
+            <div class="form-group">
+                 <input type="password" class="form-control" placeholder="Password" name="password"
+                      ngModel>
+            </div>
+            <div class="form-group">
+                 <input type="password" class="form-control" placeholder="Confirm Password"
+                      name="confirmPassword" ngModel>
+            </div>
+            <button class="form-control btn-blue" type="submit">Add</button>
+       </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- add Admin modal -->

@@ -1,0 +1,11 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <ul>
+        <li *ngFor="let user of users">{{user.getId()}}, {{user.isActive()}}, {{user.getCreated()}}, {{user.getUpdated()}}, {{user.getName()}},
+          {{user.getEmail()}},
+          {{user.getMobileNumber()}}, {{user.getProfilePic()}}</li>
+      </ul>
+    </div>
+  </div>
+</div>

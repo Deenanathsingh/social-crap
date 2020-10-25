@@ -1,0 +1,72 @@
+.body{
+	background-color:#F0F8FF;
+	margin-top:0;
+	padding-top:20px;
+	padding-bottom:20px;
+}
+article{
+	margin-top:20px;
+	margin-bottom:40px;
+	padding-left:40px;
+	padding-right:50px;
+}
+
+.friend-list{
+	height: auto;
+	width:100%;
+	margin-right: 20px;
+	padding:20px;
+	background-color: #FFFFFF;
+	min-height: 480px;
+}
+
+.friend-list h4{
+	margin-top:10px;
+	margin-left:20px;
+	margin-bottom: 20px;
+}
+
+.friend-list a{
+	text-decoration: none;
+	color:#000000;
+}
+
+.friend-list a.hover{
+	text-decoration: none;
+}
+
+.friend{
+	margin:20px;
+}
+
+.friend img{
+	width: 72px;
+	height: 72px;
+}
+
+.friend span.name{
+	position: absolute;
+	margin-top:24px;
+	margin-left:10px;
+}
+
+.friend span.time{
+	position: absolute;
+	font-size:11px;
+	margin-top:33px;
+	margin-left:10px;
+}
+
+.friend button{
+	float: right;
+	margin-top:20px;
+}
+
+.btn-blue{
+	background-color:#0045cc;
+	color:#FFFFFF;
+}
+
+.btn-blue:hover{
+	opacity: 0.9;
+}

@@ -1,0 +1,19 @@
+<app-header></app-header>
+<div class="body">
+    <article class="container">
+        <div class="row justify-content-center">
+            <div class="col-sm-8 notifications">
+                <h4>Notifications</h4>
+                <hr>
+                <div *ngIf="notifications">
+                    <div *ngFor="let notification of notifications" class="notification">
+                        <img src="../assets/img/example.png" class="rounded-circle">
+                        <span>{{notification.notification}}</span>
+                        <hr>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+</div>
+<app-footer></app-footer>

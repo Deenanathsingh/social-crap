@@ -1,0 +1,21 @@
+<app-header></app-header>
+<div class="body">
+    <article class="container">
+        <div class="row justify-content-center">
+            <div class="col-sm-8 friend-list">
+                <h4>Friends</h4>
+                <hr>
+                <div *ngIf="user && user.friends">
+                    <div *ngFor="let friend of user.friends" class="friend">
+                        <img *ngIf="friend.profilePic" [src]="friend.profilePic">
+                        <img *ngIf="!friend.profilePic" src="../assets/img/example.png">
+                        <span class="name">{{friend.name}}</span>
+                        <button (click)="unFriend(friend.userId)" class="btn btn-blue">Unfriend</button>
+                        <hr>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+</div>
+<app-footer></app-footer>

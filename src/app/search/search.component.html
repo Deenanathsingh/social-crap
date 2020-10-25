@@ -1,0 +1,36 @@
+<app-header></app-header>
+<div class="body">
+    <article class="container">
+        <div class="row justify-content-center">
+            <div class="col-sm-8 search">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Search" [(ngModel)]="searchTerm"
+                        (ngModelChange)="search()">
+                </div>
+                <h5>Search Results</h5>
+                <div *ngIf="results">
+                    <hr>
+                    <div *ngFor="let result of results" class="result">
+                        <img *ngIf="result.profilePic" [src]="result.profilePic" class="rounded-circle">
+                        <img *ngIf="!result.profilePic" src="../assets/img/example.png" class="rounded-circle">
+                        <span class="name">{{result.name}}</span>
+                        <button
+                            *ngIf=" isRequestAlreadySent(result.userId) && !isFriendRequestRecieved(result.userId) && !isAFriend(result.userId)"
+                            class="btn btn-secondary">Request Sent</button>
+                        <button
+                            *ngIf="isFriendRequestRecieved(result.userId) && !isRequestAlreadySent(result.userId) && !isAFriend(result.userId)"
+                            (click)="confirmFriendRequest(result.requestId)"  class="btn btn-blue">Accept</button>
+                        <button
+                            *ngIf="isAFriend(result.userId) && !isFriendRequestRecieved(result.userId) && !isRequestAlreadySent(result.userId)"
+                            (click)="unFriend(result.userId)" class="btn btn-success">Friends</button>
+                        <button
+                            *ngIf="!isRequestAlreadySent(result.userId) && !isAFriend(result.userId) && !isFriendRequestRecieved(result.userId)"
+                            (click)="sendFriendRequest(result.userId)" class="btn btn-blue">Send Request</button>
+                        <hr>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+</div>
+<app-footer></app-footer>

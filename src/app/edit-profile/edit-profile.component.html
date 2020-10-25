@@ -1,0 +1,192 @@
+<app-header></app-header>
+<article class="container">
+    <div class="row panel">
+        <div class="col-md-7">
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a class="nav-link" [ngClass]="{'active': isProfile}" (click)="getProfile()">Profile</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" [ngClass]="{'active': isAbout}" (click)="getAbout()">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" [ngClass]="{'active': isAddress}" (click)="getAddress()">Address</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" [ngClass]="{'active': isRecovery}" (click)="getRecovery()">Recovery Options</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" [ngClass]="{'active': isPassword}" (click)="getPassword()">Change Password</a>
+                </li>
+            </ul>
+            <div class="editor">
+                <div [ngClass]="{'display': !isProfile}" class="profile">
+                    <form (ngSubmit)="updateProfile(profileData)" #profileData="ngForm">
+                        <fieldset [disabled]="formDisable">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" placeholder="First name"
+                                            name="firstName" [value]="user && user.firstName ? user.firstName : null"
+                                            ngModel>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" placeholder="Last name" name="lastName"
+                                            [value]="user && user.lastName ? user.lastName : null" ngModel>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Mobile Number" name="mobileNumber"
+                                    [value]="user && user.mobileNumber ? user.mobileNumber : null" ngModel>
+                            </div>
+                            <div class="form-group">
+                                <input type="email" class="form-control" placeholder="Email address" name="email"
+                                    [value]="user && user.email ? user.email : null" ngModel>
+                            </div>
+                            <img class="edit-icon" (click)="enableForm()" src="/assets/img/icon/edit-icon.png">
+                            <button class="btn btn-success btn-self" type="submit">SAVE</button>
+                        </fieldset>
+                    </form>
+                </div>
+                <div [ngClass]="{'display': !isAbout}" class="about">
+                    <form (ngSubmit)="updateAbout(aboutData)" #aboutData="ngForm">
+                        <fieldset [disabled]="formDisable">
+                            <div class="form-group">
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label">
+                                        <input class="form-check-input" type="radio" name="gender" value="male" ngModel>
+                                        Male
+                                    </label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <label class="form-check-label">
+                                        <input class="form-check-input" type="radio" name="gender" value="female"
+                                            ngModel>
+                                        Female
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Bio</label>
+                                <textarea class="form-control" name="bio" rows="3"
+                                    [value]="user && user.about.bio ? user.about.bio : null" ngModel></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label>Relationship Status</label>
+                                <select class="form-control" name="relationShip" ngModel>
+                                    <option [value]="single">Single</option>
+                                    <option [value]="married">Married</option>
+                                    <option [value]="complicated">Complicated</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Date of Birth</label>
+                                <input class="form-control" type="date" name="dob"
+                                    [value]="user && user.about.dob ? user.about.dob : null" ngModel>
+                            </div>
+                            <img class="edit-icon" (click)="enableForm()" src="/assets/img/icon/edit-icon.png">
+                            <button class="btn btn-success btn-self" type="submit">SAVE</button>
+                        </fieldset>
+                    </form>
+                </div>
+                <div [ngClass]="{'display': !isAddress}" class="address">
+                    <form (ngSubmit)="updateAddress(addressData)" #addressData="ngForm">
+                        <fieldset [disabled]="formDisable">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="House" name="houseNumber"
+                                    [value]="user && user.address.houseNumber ? user.address.houseNumber : null"
+                                    ngModel>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Street" name="street"
+                                    [value]="user && user.address.street ? user.address.street : null" ngModel>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Area" name="area"
+                                    [value]="user && user.address.area ? user.address.area : null" ngModel>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="City" name="city"
+                                    [value]="user && user.address.city ? user.address.city : null" ngModel>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="State" name="state"
+                                    [value]="user && user.address.state ? user.address.state : null" ngModel>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Postal Code" name="pinCode"
+                                    [value]="user && user.address.pinCode ? user.address.pinCode : null" ngModel>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Country" name="country"
+                                    [value]="user && user.address.country ? user.address.country : null" ngModel>
+                            </div>
+                            <img class="edit-icon" (click)="enableForm()" src="/assets/img/icon/edit-icon.png">
+                            <button class="btn btn-success btn-self" type="submit">SAVE</button>
+                        </fieldset>
+                    </form>
+                </div>
+                <div [ngClass]="{'display': !isRecovery}" class="recovery">
+                    <form (ngSubmit)="updateRecoveryOptions(recoveryData)" #recoveryData="ngForm">
+                        <fieldset [disabled]="formDisable">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Recovery Email"
+                                    name="recoveryEmail"
+                                    [value]="user && user.recoveryDetails.recoveryEmail ? user.recoveryDetails.recoveryEmail : null"
+                                    ngModel>
+                            </div>
+                            <div class="form-group">
+                                <select class="form-control" name="firstQuestion" ngModel>
+                                    <option selected>
+                                        {{user.recoveryDetails.firstQuestion}}</option>
+                                    <option *ngFor="let question of questions1">
+                                        {{question}}
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Answer" name="firstAnswer" ngModel>
+                            </div>
+                            <div class="form-group">
+                                <select class="form-control" id="relationShip" name="secondQuestion" ngModel>
+                                    <option selected>
+                                        {{user.recoveryDetails.secondQuestion}}</option>
+                                    <option *ngFor="let question of questions2">
+                                        {{question}}
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Answer" name="secondAnswer"
+                                    ngModel>
+                            </div>
+                            <img class="edit-icon" (click)="enableForm()" src="/assets/img/icon/edit-icon.png">
+                            <button class="btn btn-success btn-self" type="submit">SAVE</button>
+                        </fieldset>
+                    </form>
+                </div>
+                <div [ngClass]="{'display': !isPassword}" class="password">
+                    <form (ngSubmit)="changePassword(passwordData); passwordData.reset()" #passwordData="ngForm">
+                        <div class="form-group">
+                            <input type="password" class="form-control" placeholder="New Password" name="newPassword"
+                                ngModel>
+                        </div>
+                        <div class="form-group">
+                            <input type="password" class="form-control" placeholder="Confirm Password"
+                                name="confirmPassword" ngModel>
+                        </div>
+                        <div class="form-group">
+                            <input type="password" class="form-control" placeholder="Old Password" name="oldPassword"
+                                ngModel>
+                        </div>
+                        <button class="btn btn-success btn-self" type="submit">SAVE</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</article>
+<app-footer></app-footer>
